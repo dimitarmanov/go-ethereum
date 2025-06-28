@@ -10,7 +10,9 @@
 - ./infra - GCP K8s cluster and manifests
 - ./blockscout - resources for blocksout stack deployment
 
-# Send a transaction
+# Send a transaction:
+
+1. From Geth directly
 ```
 docker exec -it geth geth attach http://localhost:8545
 
@@ -24,6 +26,12 @@ eth.sendTransaction({
   value: web3.toWei(1, "ether")
 })
 ```
+2. From Hardhat script
+```
+npx hardhat run scripts/send-tx.js --network local 
+```
+
+
 # Check connectivity from backend to Geth
 ```
 docker compose exec backend curl -s -X POST http://geth:8545 \
