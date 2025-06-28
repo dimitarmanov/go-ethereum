@@ -12,9 +12,10 @@ services:
       - --datadir=/root/.ethereum
       - --http
       - --http.addr=0.0.0.0
-      - --http.api=eth,net,web3,personal
-      - --allow-insecure-unlock
+      - --http.api=eth,net,web3,personal,debug,txpool
       - --http.corsdomain=*
+      - --http.vhosts=*
+      - --allow-insecure-unlock
 
   redis-db:
     extends:
@@ -84,14 +85,6 @@ services:
     extends:
       file: ./blockscout/docker-compose/services/stats.yml
       service: stats
-
-  user-ops-indexer:
-    depends_on:
-      - db
-      - backend
-    extends:
-      file: ./blockscout/docker-compose/services/user-ops-indexer.yml
-      service: user-ops-indexer
 
   proxy:
     depends_on:
